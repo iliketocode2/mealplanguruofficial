@@ -40,7 +40,7 @@ export default function ContactForm() {
   return (
     <div className="max-w-md mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">Contact Us</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 text-black">
         <div>
           <label className="block mb-1">Name</label>
           <input

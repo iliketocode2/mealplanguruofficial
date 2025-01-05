@@ -44,16 +44,20 @@ export default function Tufts() {
           <div className="posts-list">
             {recentPosts.map(([postId, post]) => (
               <div key={postId} className="post-summary">
-                <Link href={`/tufts/posts/${postId}`}>
-                  <h2>{post.title}</h2>
-                  <p>{post.date}</p>
-                  <p>{post.author}</p>
-                  <div className="tags">
-                    {post.tags.map((tag, index) => (
-                      <span key={index} className="tag">{tag}</span>
-                    ))}
-                  </div>
-                </Link>
+                {postId ? ( // Check if postId is defined
+                  <Link href={`/tufts/posts/${postId}`}>
+                    <h2>{post.title}</h2>
+                    <p>{post.date}</p>
+                    <p>{post.author}</p>
+                    <div className="tags"> 
+                      {post.tags.map((tag, index) => (
+                        <span key={index} className="tag">{tag}</span>
+                      ))}
+                    </div>
+                  </Link>
+                ) : (
+                  <p>Post ID is not available</p> // Fallback if postId is undefined
+                )}
               </div>
             ))}
           </div>

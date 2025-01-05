@@ -10,6 +10,9 @@ export default function NavBar() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex space-x-4">
+          <Link href="/">
+              <img src="/logo.svg" alt="Logo" className="h-8" />
+            </Link>
             <Link 
               href="/" 
               className={`${pathname === '/' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600 px-3 py-2`}
@@ -27,12 +30,6 @@ export default function NavBar() {
               className={`${pathname === '/about' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600 px-3 py-2`}
             >
               About
-            </Link>
-            <Link 
-              href="/tufts" 
-              className={`${pathname === '/tufts' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600 px-3 py-2`}
-            >
-              Tufts
             </Link>
             <Link 
               href="/contact" 

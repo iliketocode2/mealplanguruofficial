@@ -39,15 +39,6 @@ export default function About() {
           id="william_goldman" 
           className="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-start"
         >
-          <div className="w-full md:w-1/4 relative">
-            <Image
-              src="/api/placeholder/150/150"
-              alt="William Goldman"
-              width={150}
-              height={150}
-              className="rounded-lg"
-            />
-          </div>
           <div className="w-full md:w-3/4">
             <h2 className="text-2xl font-bold mb-4">William Goldman</h2>
             <p className="text-gray-700">
@@ -66,15 +57,6 @@ export default function About() {
           id="elliot_smith" 
           className="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-start"
         >
-          <div className="w-full md:w-1/4 relative">
-            <Image
-              src="/api/placeholder/150/150"
-              alt="Elliot Smith"
-              width={150}
-              height={150}
-              className="rounded-lg"
-            />
-          </div>
           <div className="w-full md:w-3/4">
             <h2 className="text-2xl font-bold mb-4">Elliot Smith</h2>
             <p className="text-gray-700">
@@ -93,15 +75,6 @@ export default function About() {
           id="priya_shah" 
           className="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-start"
         >
-          <div className="w-full md:w-1/4 relative">
-            <Image
-              src="/api/placeholder/150/150"
-              alt="Priya Shah"
-              width={150}
-              height={150}
-              className="rounded-lg"
-            />
-          </div>
           <div className="w-full md:w-3/4">
             <h2 className="text-2xl font-bold mb-4">Priya Shah</h2>
             <p className="text-gray-700">

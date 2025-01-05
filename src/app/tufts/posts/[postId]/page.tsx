@@ -42,6 +42,10 @@ export default function BlogPostPage() {
   const [popularPosts, setPopularPosts] = useState<Array<[string, Post]>>([]);
   const router = useRouter();
 
+  const generateAuthorId = (author: string) => {
+    return author.toLowerCase().replace(/\s+/g, '_');
+  };
+
   useEffect(() => {
     const minLoadingTime = 500; // ms
     const loadStart = Date.now();
@@ -136,7 +140,11 @@ export default function BlogPostPage() {
           />
           <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
           <div className="text-gray-600 mb-2">{post.date}</div>
-          <div className="text-gray-600 mb-4">{post.author}</div>
+          <div className="text-gray-600 mb-4">
+            <Link href={`/about#${generateAuthorId(post.author)}`} className="text-blue-500 hover:underline">
+              {post.author}
+            </Link>
+          </div>
           <div className="mb-4">Views: {viewCounts[postId] || 0}</div>
           <div className="prose max-w-none">{post.content}</div>
           <div className="mt-4 flex flex-wrap gap-2">

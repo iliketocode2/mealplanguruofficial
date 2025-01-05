@@ -1,12 +1,17 @@
 import { NextResponse } from 'next/server';
 import pool from '@/app/lib/db';
 
-export async function GET(
+export async function POST(
   request: Request,
-  { params }: { params: { postId: string } }
+  context: { params: Promise<{ postId: string }> }
 ) {
+  const { postId } = await context.params;
+
   try {
-    const result = await pool.query('SELECT view_count FROM posts WHERE id = $1', [params.postId]);
+    const result = await pool.query(
+      'UPDATE posts SET view_count = view_count + 1 WHERE id = $1 RETURNING view_count',
+      [postId]
+    );
     if (result.rows.length > 0) {
       return NextResponse.json({ viewCount: result.rows[0].view_count });
     }

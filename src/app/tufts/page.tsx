@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { plans } from '@/app/lib/tuftsplans'
 import { posts } from '@/app/lib/tuftsposts'
+import MealPlanCalculator from '@/components/MealPlanCalculator';
+
 
 export default function Tufts() {
   const recentPosts = Object.entries(posts)
@@ -87,6 +89,11 @@ export default function Tufts() {
 
         <section id="meal-plans" className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plans</h2>
+
+          <div className="mb-8">
+            <MealPlanCalculator plans={plans} />
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6">
             {plans.map((plan, index) => (
               <div key={index} className="border rounded-lg p-6 hover:shadow-md transition-shadow">

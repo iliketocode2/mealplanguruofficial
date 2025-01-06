@@ -7,8 +7,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Your Website',
-  description: 'Your website description',
+  title: 'MealPlanGuru',
+  description: 'Smart Meal Planning for Modern Students',
 };
 
 export default function RootLayout({

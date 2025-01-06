@@ -3,51 +3,36 @@ import Link from 'next/link'
 import { plans } from '@/app/lib/tuftsplans'
 import { posts } from '@/app/lib/tuftsposts'
 import MealPlanCalculator from '@/components/MealPlanCalculator';
-
+import HandyResources from '@/components/HandyResources';
 
 export default function Tufts() {
   const recentPosts = Object.entries(posts)
     .sort(([, postA], [, postB]) => 
       new Date(postB.date).getTime() - new Date(postA.date).getTime())
-    .slice(0, 3);
+    .slice(0, 2);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
-      <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-        <header className="flex justify-between items-center bg-white rounded-lg shadow-sm p-6">
-          <h1 className="text-3xl font-bold text-gray-900">Tufts</h1>
-          <div className="flex space-x-4">
-          </div>
-        </header>
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Banner */}
+        <div className="flex justify-center mb-8">
+          <Link href="/tufts">
+            <Image 
+              src="/images/tufts_banner.png"
+              alt="Back to Tufts"
+              width={300} 
+              height={200}
+              className="object-contain"
+            />
+          </Link>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-6">
-            <section className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-semibold mb-4 text-gray-900">Handy Resources</h2>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-md transition-colors">
-                  <div className="logo_of_the_app w-8 h-8 bg-blue-100 rounded-full" />
-                  <p className="text-gray-700">Tufts Mobile App</p>
-                </div>
-                <a href="https://dining.tufts.edu/" 
-                   target="_blank" 
-                   rel="noreferrer"
-                   className="block p-3 text-blue-600 hover:bg-gray-50 rounded-md transition-colors">
-                  Tufts Dining
-                </a>
-                <a href="#meal-plans" 
-                   className="block p-3 text-blue-600 hover:bg-gray-50 rounded-md transition-colors">
-                  Meal Plans
-                </a>
-                <a href="#places-eat" 
-                   className="block p-3 text-blue-600 hover:bg-gray-50 rounded-md transition-colors">
-                  Places To Eat
-                </a>
-              </div>
-            </section>
-          </div>
-
-          <div className="space-y-6">
+        {/* Main layout container */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Sidebar */}
+          <aside className="lg:w-1/3 space-y-6">
+            <HandyResources />
+            
             <section className="bg-white rounded-lg shadow-sm p-6">
               <Link href="/tufts/posts" className="inline-block mb-4">
                 <h2 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
@@ -84,109 +69,111 @@ export default function Tufts() {
                 See More →
               </Link>
             </section>
-          </div>
-        </div>
+          </aside>
 
-        <section id="meal-plans" className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plans</h2>
-
-          <div className="mb-8">
-            <MealPlanCalculator plans={plans} />
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {plans.map((plan, index) => (
-              <div key={index} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
-                <h3 className="text-xl font-medium text-gray-900 mb-2">{plan.name}</h3>
-                <p className="text-gray-600 mb-2">{plan.details}</p>
-                <p className="text-lg font-bold text-gray-900 mb-2">{plan.price}</p>
-                <p className="text-gray-600 mb-4">{plan.extra}</p>
-                <Link href={`/tufts/posts?tag=${plan.tag}`}
-                      className="text-blue-600 hover:text-blue-700 transition-colors">
-                  See Related Posts →
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="places-eat" className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-medium mb-4 text-gray-900">Dining Halls</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                  <h4>
-                    <a href="https://dining.tufts.edu/where-to-eat/dewick-macphie-dining-center" 
-                       target="_blank" 
-                       rel="noreferrer"
-                       className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                      Dewick MacPhie
-                    </a>
-                  </h4>
-                  <p className="text-gray-600 mt-2">description</p>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                  <h4>
-                    <a href="https://dining.tufts.edu/where-to-eat/fresh-carmichael-dining-center" 
-                       target="_blank" 
-                       rel="noreferrer"
-                       className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                      Carmichael
-                    </a>
-                  </h4>
-                  <p className="text-gray-600 mt-2">description</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-medium mb-4 text-gray-900">Retail Locations</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {[
-                  { name: 'Hodgdon', url: 'hodgdon-food-on-the-run' },
-                  { name: 'Kindlevan Cafe', url: 'kindlevan-cafe' },
-                  { name: 'Mugar Cafe', url: 'mugar-cafe' },
-                  { name: 'Hotung Cafe', url: 'hotung-cafe' },
-                  { name: 'Commons Marketplace', url: 'commons-marketplace' },
-                  { name: 'Pax et Lox', url: 'pax-et-lox' },
-                  { name: 'Tower Cafe', url: 'tower-cafe' }
-                ].map((location) => (
-                  <div key={location.name} className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                    <h4>
-                      <a href={`https://dining.tufts.edu/where-to-eat/${location.url}`}
-                         target="_blank"
-                         rel="noreferrer"
-                         className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                        {location.name}
-                      </a>
-                    </h4>
-                    <p className="text-gray-600 mt-2">description</p>
+          {/* Main content */}
+          <main className="lg:w-2/3 space-y-6">
+            <section id="meal-plans" className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plans</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {plans.map((plan, index) => (
+                  <div key={index} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
+                    <h3 className="text-xl font-medium text-gray-900 mb-2">{plan.name}</h3>
+                    <p className="text-gray-600 mb-2">{plan.details}</p>
+                    <p className="text-lg font-bold text-gray-900 mb-2">{plan.price}</p>
+                    <p className="text-gray-600 mb-4">{plan.extra}</p>
+                    <Link href={`/tufts/posts?tag=${plan.tag}`}
+                          className="text-blue-600 hover:text-blue-700 transition-colors">
+                      See Related Posts →
+                    </Link>
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
 
-            <div>
-              <h3 className="text-xl font-medium mb-4 text-gray-900">Other Locations</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                  <h4>
-                    <a href="https://dining.tufts.edu/where-to-eat/smfa-cafe"
-                       target="_blank"
-                       rel="noreferrer"
-                       className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                      SMFA Cafe
-                    </a>
-                  </h4>
-                  <p className="text-gray-600 mt-2">description</p>
+            <section id="calculator" className="bg-white rounded-lg shadow-sm p-6">
+              <MealPlanCalculator plans={plans} />
+            </section>
+
+            <section id="places-eat" className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
+              
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-xl font-medium mb-4 text-gray-900">Dining Halls</h3>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                      <h4>
+                        <a href="https://dining.tufts.edu/where-to-eat/dewick-macphie-dining-center" 
+                           target="_blank" 
+                           rel="noreferrer"
+                           className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
+                          Dewick MacPhie
+                        </a>
+                      </h4>
+                      <p className="text-gray-600 mt-2">description</p>
+                    </div>
+                    <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                      <h4>
+                        <a href="https://dining.tufts.edu/where-to-eat/fresh-carmichael-dining-center" 
+                           target="_blank" 
+                           rel="noreferrer"
+                           className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
+                          Carmichael
+                        </a>
+                      </h4>
+                      <p className="text-gray-600 mt-2">description</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-medium mb-4 text-gray-900">Retail Locations</h3>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {[
+                      { name: 'Hodgdon', url: 'hodgdon-food-on-the-run' },
+                      { name: 'Kindlevan Cafe', url: 'kindlevan-cafe' },
+                      { name: 'Mugar Cafe', url: 'mugar-cafe' },
+                      { name: 'Hotung Cafe', url: 'hotung-cafe' },
+                      { name: 'Commons Marketplace', url: 'commons-marketplace' },
+                      { name: 'Pax et Lox', url: 'pax-et-lox' },
+                      { name: 'Tower Cafe', url: 'tower-cafe' }
+                    ].map((location) => (
+                      <div key={location.name} className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                        <h4>
+                          <a href={`https://dining.tufts.edu/where-to-eat/${location.url}`}
+                             target="_blank"
+                             rel="noreferrer"
+                             className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
+                            {location.name}
+                          </a>
+                        </h4>
+                        <p className="text-gray-600 mt-2">description</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-medium mb-4 text-gray-900">Other Locations</h3>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
+                      <h4>
+                        <a href="https://dining.tufts.edu/where-to-eat/smfa-cafe"
+                           target="_blank"
+                           rel="noreferrer"
+                           className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
+                          SMFA Cafe
+                        </a>
+                      </h4>
+                      <p className="text-gray-600 mt-2">description</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
+          </main>
+        </div>
       </div>
     </div>
   );

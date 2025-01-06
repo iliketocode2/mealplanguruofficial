@@ -53,7 +53,7 @@ const MealPlanCalculator = ({ plans }: { plans: Plan[] }) => {
     const expectedMeals = daysInSemester * mealsPerDay * (1 - (eatingOut - 1) * 0.2);
     
     // Adjust for snacks preference
-    const adjustedMeals = wantsSnacks ? expectedMeals * 1.2 : expectedMeals;
+    const adjustedMeals = wantsSnacks ? expectedMeals * 1.3 : expectedMeals;
 
     // Score each plan
     return availablePlans.map(plan => {

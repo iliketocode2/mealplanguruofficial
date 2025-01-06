@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function School() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-100">
+    <main className="min-h-max bg-gradient-to-b from-white to-gray-100">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
@@ -20,16 +20,16 @@ export default function School() {
               href="/tufts" 
               className="group relative flex flex-col items-center"
             >
-              <div className="w-[200px] h-[200px] rounded-full overflow-hidden bg-white shadow-lg 
-                            ring-2 ring-blue-500/50 transition-all duration-300
-                            group-hover:ring-4 group-hover:shadow-2xl">
+              <div className="w-[225px] h-[225px] rounded-full overflow-hidden bg-white shadow-lg 
+                            ring-0 ring-blue-500/50 transition-all duration-300
+                            group-hover:ring-0 group-hover:shadow-2xl">
                 <Image
                   src="/images/tufts.png"
                   alt="Tufts University"
-                  width={200}
-                  height={200}
+                  width={400}
+                  height={400}
                   priority
-                  className="object-cover w-full h-full transition-transform duration-300 
+                  className="p-1 object-cover w-full h-full transition-transform duration-300 
                            group-hover:scale-125"
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
@@ -46,14 +46,14 @@ export default function School() {
 
             {/* Harvard - Coming Soon */}
             <div className="relative flex flex-col items-center opacity-70">
-              <div className="w-[200px] h-[200px] rounded-full overflow-hidden bg-white shadow-lg
+              <div className="w-[225px] h-[225px] rounded-full overflow-hidden bg-white shadow-lg
                             ring-2 ring-gray-200 relative">
                 <Image
                   src="/images/harvard.png"
                   alt="Harvard University"
                   width={400}
                   height={400}
-                  className="object-cover w-full h-full filter"
+                  className="p-1 object-cover w-full h-full filter"
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRg..."
                 />
@@ -73,7 +73,7 @@ export default function School() {
 
             {/* Boston University - Coming Soon */}
             <div className="relative flex flex-col items-center opacity-70">
-              <div className="w-[200px] h-[200px] rounded-full overflow-hidden bg-white shadow-lg
+              <div className="w-[225px] h-[225px] rounded-full overflow-hidden bg-white shadow-lg
                             ring-2 ring-gray-200 relative">
                 <Image
                   src="/images/bu.jpg"

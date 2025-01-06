@@ -106,7 +106,7 @@ export default function BlogPostPage() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80">
               <Link
                 href="/tufts/posts"
-                className="p-6 inline-block mt-0 text-white-600 group"
+                className="p-6 inline-block mt-0 group text-white"
               >
                 ← All Posts
                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-white"></span>

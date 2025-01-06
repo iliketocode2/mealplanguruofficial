@@ -6,34 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Post } from '@/app/lib/types';
 
-// Skeleton loading component for a single post
-const PostSkeleton = () => (
-  <div className="animate-pulse">
-    <div className="relative w-full h-48 bg-gray-200 rounded mb-4" /> {/* Image placeholder */}
-    <div className="h-8 bg-gray-200 rounded w-3/4 mb-2" /> {/* Title */}
-    <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" /> {/* Date */}
-    <div className="h-4 bg-gray-200 rounded w-1/3 mb-4" /> {/* Author */}
-    <div className="space-y-3"> {/* Content */}
-      <div className="h-4 bg-gray-200 rounded w-full" />
-      <div className="h-4 bg-gray-200 rounded w-full" />
-      <div className="h-4 bg-gray-200 rounded w-5/6" />
-    </div>
-  </div>
-);
-
-// Skeleton for popular posts sidebar
-const PopularPostsSkeleton = () => (
-  <div className="animate-pulse space-y-4">
-    <div className="h-6 bg-gray-200 rounded w-1/2" /> {/* Section title */}
-    {[1, 2, 3].map((i) => (
-      <div key={i} className="space-y-2">
-        <div className="h-5 bg-gray-200 rounded w-3/4" /> {/* Post title */}
-        <div className="h-4 bg-gray-200 rounded w-1/2" /> {/* Post excerpt */}
-      </div>
-    ))}
-  </div>
-);
-
 export default function BlogPostPage() {
   const { postId } = useParams<{ postId: string }>();
   const [post, setPost] = useState<Post | null>(null);
@@ -109,80 +81,122 @@ export default function BlogPostPage() {
     fetchData();
   }, [postId, router]);
 
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <PostSkeleton />
-          </div>
-          <aside className="lg:col-span-1">
-            <PopularPostsSkeleton />
-          </aside>
-        </div>
-      </div>
-    );
-  }
+  if (loading) return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  )
 
   if (!post) return null;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <article className="lg:col-span-2">
-          <Image 
-            src={post.imageUrl} 
-            alt={post.title}
-            width={800}
-            height={400}
-            className="rounded-lg mb-6"
-            priority
-          />
-          <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-          <div className="text-gray-600 mb-2">{post.date}</div>
-          <div className="text-gray-600 mb-4">
-            <Link href={`/about#${generateAuthorId(post.author)}`} className="text-blue-500 hover:underline">
-              {post.author}
-            </Link>
-          </div>
-          <div className="mb-4">Views: {viewCounts[postId] || 0}</div>
-          <div className="prose max-w-none">{post.content}</div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {post.tags.map((tag, index) => (
-              <span 
-                key={index} 
-                className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+    <div className="min-h-screen bg-gray-100">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <article className="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
+            {/* Hero section with background image */}
+            <div className="relative h-64">
+              <Image 
+                src={post.imageUrl} 
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80">
+              <Link
+                href="/tufts/posts"
+                className="p-6 inline-block mt-0 text-white-600 group"
               >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </article>
-
-        <aside className="lg:col-span-1">
-          <h2 className="text-2xl font-bold mb-6">Popular Posts</h2>
-          <div className="space-y-6">
-            {popularPosts.map(([id, popularPost]) => (
-              <Link 
-                href={`/tufts/posts/${id}`} 
-                key={id}
-                className="block group"
-              >
-                <div className="border rounded-lg p-4 transition-shadow hover:shadow-lg">
-                  <h3 className="font-bold mb-2 group-hover:text-blue-600">
-                    {popularPost.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {popularPost.content.substring(0, 100)}...
-                  </p>
-                  <div className="text-sm text-gray-500 mt-2">
-                    Views: {viewCounts[id] || 0}
+                ← All Posts
+                <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-white"></span>
+              </Link>
+                <div className="absolute bottom-0 p-6 w-full">
+                  <h1 className="text-4xl font-bold mb-3 text-white">{post.title}</h1>
+                  <div className="flex items-center space-x-4 text-gray-200 text-sm">
+                    <Link 
+                      href={`/about#${generateAuthorId(post.author)}`} 
+                      className="hover:text-indigo-300 transition-colors duration-200"
+                    >
+                      By {post.author}
+                    </Link>
+                    <span>|</span>
+                    <time>{post.date}</time>
+                    <span>|</span>
+                    <span>{viewCounts[postId] || 0} views</span>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        </aside>
+              </div>
+            </div>
+            
+            {/* Article content */}
+            <div className="p-6">
+              <div className="prose max-w-none text-gray-800">
+                  {post.content.map((paragraph, index) => (
+                    <p className="mb-5" key={index}>{paragraph}</p>
+                  ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {post.tags.map((tag, index) => (
+                  <span 
+                    key={index} 
+                    className="px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          <aside className="lg:col-span-1 bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900">Popular Posts</h2>
+            <div className="space-y-4">
+              {popularPosts.map(([id, popularPost], index) => (
+                <Link 
+                  href={`/tufts/posts/${id}`} 
+                  key={id}
+                  className="block group"
+                >
+                <div className="pl-6 border border-gray-200 rounded-lg p-4 transition-all duration-200 hover:shadow-md hover:border-indigo-200 bg-white">
+                  <div className="flex items-start space-x-4 relative">
+
+                    {/* Image container */}
+                    <div className="flex-none relative">
+                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                        <Image
+                          src={popularPost.imageUrl}
+                          alt={popularPost.title}
+                          width={100}
+                          height={100}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+
+                      {/* Popular Number */}
+                      <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-blue-600 border-white border-2 rounded-full flex items-center justify-center text-xl font-bold text-white">
+                        {index + 1}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="font-bold mb-2 text-gray-900 group-hover:text-indigo-600 transition-colors duration-200">
+                        {popularPost.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm line-clamp-2">
+                        {popularPost.content.join(' ').substring(0, 100)}...
+                      </p>
+                      <div className="text-sm text-gray-500 mt-2">
+                        {viewCounts[id] || 0} views
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );

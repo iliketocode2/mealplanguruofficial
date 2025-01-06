@@ -9,7 +9,7 @@ export type Plan = {
 export type Post = {
     title: string;
     date: string;
-    content: string;
+    content: string[];
     author: string;
     imageUrl: string;
     tags: string[];

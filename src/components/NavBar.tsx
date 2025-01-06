@@ -13,14 +13,14 @@ export default function NavBar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
+              <img src="/logo.svg" alt="Logo" className="h-12 w-auto" />
             </Link>
           </div>
           
           <div className="hidden md:flex items-center space-x-1">
             {[
               { href: '/', label: 'Home' },
-              { href: '/school', label: 'School' },
+              { href: '/school', label: 'Find Your School' },
               { href: '/about', label: 'About' },
               { href: '/contact', label: 'Contact' }
             ].map((link) => (
@@ -63,7 +63,7 @@ export default function NavBar() {
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {[
             { href: '/', label: 'Home' },
-            { href: '/school', label: 'School' },
+            { href: '/school', label: 'Find Your School' },
             { href: '/about', label: 'About' },
             { href: '/contact', label: 'Contact' }
           ].map((link) => (

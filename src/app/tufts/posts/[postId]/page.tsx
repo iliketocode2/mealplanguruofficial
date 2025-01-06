@@ -94,7 +94,7 @@ export default function BlogPostPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <article className="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
-            {/* Hero section with background image */}
+            {/* Main section with background image */}
             <div className="relative h-64">
               <Image 
                 src={post.imageUrl} 
@@ -131,7 +131,7 @@ export default function BlogPostPage() {
             
             {/* Article content */}
             <div className="p-6">
-              <div className="prose max-w-none text-gray-800">
+              <div className="prose max-w-none text-gray-800 text-base/loose">
                   {post.content.map((paragraph, index) => (
                     <p className="mb-5" key={index}>{paragraph}</p>
                   ))}

@@ -19,3 +19,13 @@ export type Post = {
 export type DatabasePost = Post & {
     id: string;
 }
+
+export interface DiningLocation {
+    name: string;
+    url: string;
+    image: string;
+    rating: number;
+    address: string;
+    description: string;
+    type: 'dining-hall' | 'retail' | 'other';
+  }

@@ -42,19 +42,20 @@ export default function About() {
           <div className="col-span-2 space-y-6">
 
             {/* William Goldman */}
-            <div id="william_goldman" className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-600">
-              <h2 className="text-3xl font-bold mb-2 text-gray-900">William Goldman</h2>
-              <p className="text-sm text-gray-500 mb-4">Founder & Developer</p>
-              <p className="text-gray-600 leading-relaxed">
+            <div id="william_goldman" className="bg-blue-50 rounded-3xl shadow-lg p-8 transform">
+              <h2 className="text-3xl font-bold mb-2 text-blue-800">William Goldman</h2>
+              <p className="text-sm text-blue-600 mb-4 font-semibold">Founder & Developer</p>
+              <p className="text-gray-700 leading-relaxed">
                 William Goldman is a junior majoring in Sociology with a minor in Environmental Studies at Tufts University. Known for his adventurous palate, he has a deep appreciation for sustainability in food systems. William is passionate about helping his peers make informed choices about meal plans that align with their habits and values.
               </p>
             </div>
 
-            <div id="william_goldman" className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-600">
-              <h2 className="text-3xl font-bold mb-2 text-gray-900">Anonymous Contributers</h2>
-              <p className="text-sm text-gray-500 mb-4">Bloggers & Photographers</p>
-              <p className="text-gray-600 leading-relaxed">
-                Thanks to all of our anonymous contributers!
+            {/* Anonymous Contributors */}
+            <div className="bg-blue-50 rounded-3xl shadow-lg p-8 transform">
+              <h2 className="text-3xl font-bold mb-2 text-blue-800">Anonymous Contributors</h2>
+              <p className="text-sm text-blue-600 mb-4 font-semibold">Bloggers & Photographers</p>
+              <p className="text-gray-700 leading-relaxed">
+                Thanks to all of our anonymous contributors!
               </p>
             </div>
 

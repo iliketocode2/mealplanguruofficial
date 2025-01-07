@@ -2,14 +2,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { plans } from '@/app/lib/tuftsplans'
 import { posts } from '@/app/lib/tuftsposts'
+import { diningLocations } from '@/app/lib/diningLocations';
 import MealPlanCalculator from '@/components/MealPlanCalculator';
 import HandyResources from '@/components/HandyResources';
+import DiningLocationCard from '@/components/DiningLocationCard';
 
 export default function Tufts() {
   const recentPosts = Object.entries(posts)
     .sort(([, postA], [, postB]) => 
       new Date(postB.date).getTime() - new Date(postA.date).getTime())
-    .slice(0, 2);
+    .slice(0, 4);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
@@ -30,10 +32,12 @@ export default function Tufts() {
         {/* Main layout container */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Sidebar */}
-          <aside className="lg:w-1/3 space-y-6">
-            <HandyResources />
+          <aside className="lg:w-1/3 flex flex-col">
+            <div className="mb-6">
+              <HandyResources />
+            </div>
             
-            <section className="bg-white rounded-lg shadow-sm p-6">
+            <section className="bg-white rounded-lg shadow-sm p-6 flex-grow">
               <Link href="/tufts/posts" className="inline-block mb-4">
                 <h2 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                   Recent Posts
@@ -92,88 +96,51 @@ export default function Tufts() {
             </section>
 
             <section id="calculator" className="bg-white rounded-lg shadow-sm p-6">
-              <MealPlanCalculator plans={plans} />
-            </section>
-
-            <section id="places-eat" className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
-              
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-xl font-medium mb-4 text-gray-900">Dining Halls</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                      <h4>
-                        <a href="https://dining.tufts.edu/where-to-eat/dewick-macphie-dining-center" 
-                           target="_blank" 
-                           rel="noreferrer"
-                           className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                          Dewick MacPhie
-                        </a>
-                      </h4>
-                      <p className="text-gray-600 mt-2">description</p>
-                    </div>
-                    <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                      <h4>
-                        <a href="https://dining.tufts.edu/where-to-eat/fresh-carmichael-dining-center" 
-                           target="_blank" 
-                           rel="noreferrer"
-                           className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                          Carmichael
-                        </a>
-                      </h4>
-                      <p className="text-gray-600 mt-2">description</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-medium mb-4 text-gray-900">Retail Locations</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {[
-                      { name: 'Hodgdon', url: 'hodgdon-food-on-the-run' },
-                      { name: 'Kindlevan Cafe', url: 'kindlevan-cafe' },
-                      { name: 'Mugar Cafe', url: 'mugar-cafe' },
-                      { name: 'Hotung Cafe', url: 'hotung-cafe' },
-                      { name: 'Commons Marketplace', url: 'commons-marketplace' },
-                      { name: 'Pax et Lox', url: 'pax-et-lox' },
-                      { name: 'Tower Cafe', url: 'tower-cafe' }
-                    ].map((location) => (
-                      <div key={location.name} className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                        <h4>
-                          <a href={`https://dining.tufts.edu/where-to-eat/${location.url}`}
-                             target="_blank"
-                             rel="noreferrer"
-                             className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                            {location.name}
-                          </a>
-                        </h4>
-                        <p className="text-gray-600 mt-2">description</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-medium mb-4 text-gray-900">Other Locations</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow">
-                      <h4>
-                        <a href="https://dining.tufts.edu/where-to-eat/smfa-cafe"
-                           target="_blank"
-                           rel="noreferrer"
-                           className="text-blue-600 hover:text-blue-700 transition-colors font-medium">
-                          SMFA Cafe
-                        </a>
-                      </h4>
-                      <p className="text-gray-600 mt-2">description</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="max-h-[700px] overflow-y-auto">
+                <MealPlanCalculator plans={plans} />
               </div>
             </section>
           </main>
         </div>
+
+        <section id="places-eat" className="bg-white rounded-lg shadow-sm p-6 space-y-6 mt-6">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
+          
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-medium mb-4 text-gray-900">Dining Halls</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {diningLocations
+                  .filter(location => location.type === 'dining-hall')
+                  .map(location => (
+                    <DiningLocationCard key={location.name} location={location} />
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-medium mb-4 text-gray-900">Retail Locations</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {diningLocations
+                  .filter(location => location.type === 'retail')
+                  .map(location => (
+                    <DiningLocationCard key={location.name} location={location} />
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-medium mb-4 text-gray-900">Other Locations</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {diningLocations
+                  .filter(location => location.type === 'other')
+                  .map(location => (
+                    <DiningLocationCard key={location.name} location={location} />
+                  ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

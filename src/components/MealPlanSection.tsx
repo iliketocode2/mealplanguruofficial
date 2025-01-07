@@ -6,7 +6,7 @@ export default function MealPlanSection() {
         <div>  
             <div className="grid md:grid-cols-3 gap-6">
                 {plans.map((plan, index) => (
-                <div key={index} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
+                <div key={index} className="bg-white border rounded-lg p-6 hover:shadow-md transition-shadow">
                     <h3 className="text-xl font-medium text-gray-900 mb-2">{plan.name}</h3>
                     <p className="text-gray-600 mb-2">{plan.details}</p>
                     <p className="text-lg font-bold text-gray-900 mb-2">{plan.price}</p>

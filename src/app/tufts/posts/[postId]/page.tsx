@@ -90,10 +90,10 @@ export default function BlogPostPage() {
   if (!post) return null;
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-primary-400">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <article className="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          <article className="lg:col-span-2 rounded-xl shadow-lg overflow-hidden bg-primary-100 ">
             {/* Main section with background image */}
             <div className="relative h-64">
               <Image 
@@ -116,7 +116,7 @@ export default function BlogPostPage() {
                   <div className="flex items-center space-x-4 text-gray-200 text-sm">
                     <Link 
                       href={`/about#${generateAuthorId(post.author)}`} 
-                      className="hover:text-indigo-300 transition-colors duration-200"
+                      className="hover:text-primary-400 transition-colors duration-200"
                     >
                       By {post.author}
                     </Link>
@@ -140,7 +140,7 @@ export default function BlogPostPage() {
                 {post.tags.map((tag, index) => (
                   <span 
                     key={index} 
-                    className="px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
+                    className="px-4 py-1.5 bg-white text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
                   >
                     {tag}
                   </span>
@@ -149,7 +149,7 @@ export default function BlogPostPage() {
             </div>
           </article>
 
-          <aside className="lg:col-span-1 bg-white rounded-xl shadow-lg p-6">
+          <aside className="lg:col-span-1 bg-primary-100 rounded-xl shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-900">Popular Posts</h2>
             <div className="space-y-4">
               {popularPosts.map(([id, popularPost], index) => (
@@ -158,12 +158,12 @@ export default function BlogPostPage() {
                   key={id}
                   className="block group"
                 >
-                <div className="pl-6 border border-gray-200 rounded-lg p-4 transition-all duration-200 hover:shadow-md hover:border-indigo-200 bg-white">
+                <div className="bg-white pl-6 border border-gray-200 rounded-lg p-4 transition-all duration-200 hover:shadow-md hover:border-indigo-200">
                   <div className="flex items-start space-x-4 relative">
 
                     {/* Image container */}
                     <div className="flex-none relative">
-                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                      <div className="w-24 h-24 rounded-full overflow-hidden bg-white">
                         <Image
                           src={popularPost.imageUrl}
                           alt={popularPost.title}
@@ -180,7 +180,7 @@ export default function BlogPostPage() {
                     </div>
 
                     <div>
-                      <h3 className="font-bold mb-2 text-gray-900 group-hover:text-indigo-600 transition-colors duration-200">
+                      <h3 className="font-bold mb-2 text-gray-900 group-hover:text-primary-600 transition-colors duration-200">
                         {popularPost.title}
                       </h3>
                       <p className="text-gray-600 text-sm line-clamp-2">

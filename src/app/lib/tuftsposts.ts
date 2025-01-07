@@ -10,7 +10,7 @@ export const posts: Record<string, Post> = {
       ],
       author: 'William Goldman',
       imageUrl: '/images/tufts_dining.jpg',
-      tags: ['guide'],
+      tags: ['Guide'],
       viewCount: 0,
     },
     'post-2': {
@@ -21,7 +21,7 @@ export const posts: Record<string, Post> = {
       ],
       author: 'Elliot Smith',
         imageUrl: '/images/tufts_dining.jpg',
-        tags: ['review'],
+        tags: ['Review'],
         viewCount: 0,
     },
     'post-3': {
@@ -32,7 +32,7 @@ export const posts: Record<string, Post> = {
       ],
       author: 'Elliot Smith',
         imageUrl: '/images/tufts_dining.jpg',
-        tags: ['100', 'review'],
+        tags: ['100', 'Review'],
         viewCount: 0,
     },
     'post-4': {
@@ -43,7 +43,7 @@ export const posts: Record<string, Post> = {
       ],
       author: 'Priya Shah',
         imageUrl: '/images/tufts_dining.jpg',
-        tags: ['400', 'news'],
+        tags: ['400', 'News'],
         viewCount: 0,
     },
     'post-5': {
@@ -75,7 +75,7 @@ With these thoughtfully designed meal plans, Tufts University ensures every stud
       ],
       author: 'William Goldman',
         imageUrl: '/images/tufts_dining.jpg',
-        tags: ['review'],
+        tags: ['Review'],
         viewCount: 0,
     },
     'post-6': {
@@ -102,7 +102,7 @@ In conclusion, the 160 Plan offers the best value for money, adaptability, and p
       ],
       author: 'Priya Shah',
         imageUrl: '/images/tufts_dining.jpg',
-        tags: ['160', 'opinion'],
+        tags: ['160', 'Opinion'],
         viewCount: 0,
     },
 }

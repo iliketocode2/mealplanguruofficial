@@ -26,13 +26,13 @@ export default function Tufts() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800">
+    <div className="min-h-screen bg-primary-400 text-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Banner */}
         <div className="flex justify-center mb-8">
           <Link href="/tufts">
             <Image 
-              src="/images/tufts_banner.png"
+              src="/images/tufts-logo-png-white.png"
               alt="Back to Tufts"
               width={300} 
               height={200}
@@ -79,15 +79,15 @@ export default function Tufts() {
             {/* Sidebar */}
             <aside className="lg:w-1/3 flex flex-col">
               <div className="mb-6">
-                <section className="bg-white rounded-lg shadow-sm p-6">
+                <section className="bg-primary-100 rounded-lg shadow-sm p-6">
                   <h2 className="text-xl font-semibold mb-4 text-gray-900">Handy Resources for Students</h2>
                   <HandyResources />
                 </section>
-              </div>
+              </div> 
               
-              <section className="bg-white rounded-lg shadow-sm p-6 flex-grow">
+              <section className="bg-primary-100 rounded-lg shadow-sm p-6 flex-grow">
                 <div className="space-y-4">
-                  <Link href="/tufts/posts" className="inline-block mb-4">
+                  <Link href="/tufts/posts" className="inline-block mb-0">
                     <h2 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                       Recent Posts
                     </h2>
@@ -99,12 +99,12 @@ export default function Tufts() {
 
             {/* Main content */}
             <main className="lg:w-2/3 space-y-6">
-              <section className="bg-white rounded-lg shadow-sm p-6" id="meal-plans" >
+              <section className="bg-primary-100 rounded-lg shadow-sm p-6" id="meal-plans" >
                 <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plans</h2>
                 <MealPlanSection />
               </section>
 
-              <section className="bg-white rounded-lg shadow-sm p-6" id="calculator">
+              <section className="bg-primary-100 rounded-lg shadow-sm p-6" id="calculator">
                 <div className="max-h-[700px] overflow-y-auto">
                   <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plan Calculator</h2>
                   <MealPlanCalculator plans={plans} />
@@ -113,7 +113,7 @@ export default function Tufts() {
             </main>
           </div>
 
-          <section className="bg-white rounded-lg shadow-sm p-6 space-y-6 mt-6" id="places-eat">
+          <section className="bg-primary-100 rounded-lg shadow-sm p-6 space-y-6 mt-6" id="places-eat">
               <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
               <PlacesToEatSection />
           </section>

@@ -39,13 +39,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/tufts" className="font-light hover:text-gray-300">
-                  - Tufts
+                <Link href="/tufts" className="font-light text-sm hover:text-gray-300">
+                  Tufts
                 </Link>
-                <ul className="mt-2 ml-4 space-y-1 text-sm">
+                <ul className="mt-2 space-y-1 text-sm">
                   <li>
-                    <Link href="/tufts/posts" className="font-extralight hover:text-gray-400">
-                      - Tufts Posts
+                    <Link href="/tufts/posts" className="font-extralight text-xs hover:text-gray-400">
+                      Tufts Posts
                     </Link>
                   </li>
                 </ul>

@@ -12,7 +12,7 @@ export default function RecentPosts() {
     <div>
       <div className="space-y-4">
         {recentPosts.map(([postId, post]) => (
-          <div key={postId} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+          <div key={postId} className="border-b-2 border-gray-100 last:border-0 pb-2 last:pb-0">
             {postId ? (
               <Link href={`/tufts/posts/${postId}`} 
                     className="block hover:bg-gray-50 p-3 -mx-3 rounded-md transition-colors">

@@ -5,6 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { posts } from '@/app/lib/tuftsposts'
 
+// Helper function to format view counts
+const formatViewCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1).replace(/\.0$/, '')}M`
+  }
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}k`
+  }
+  return count.toString()
+}
+
 export default function AllPosts() {
   const [sortOrder, setSortOrder] = useState<'oldToNew' | 'newToOld' | 'mostViewed'>('newToOld')
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
@@ -78,29 +89,28 @@ export default function AllPosts() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-100">      
+    <div className="min-h-screen bg-primary-400">      
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex justify-center my-8">
+          <Link href="/tufts">
+            <Image 
+              src="/images/tufts-logo-png-white.png"
+              alt="Back to Tufts"
+              width={300} 
+              height={200}
+              className="object-contain"
+            />
+          </Link>
+        </div>
 
-      <div className="flex justify-center my-8">
-        <Link href="/tufts">
-          <Image 
-            src="/images/tufts_banner.png"
-            alt="Back to Tufts"
-            width={300} 
-            height={200}
-            className="object-contain"
-          />
-        </Link>
-      </div>
-
-        <div className="text-black bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="text-black bg-primary-100 rounded-lg shadow-sm p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <label className="block">
               <span className="text-gray-700 text-sm font-medium">Sort by:</span>
               <select 
                 value={sortOrder} 
                 onChange={(e) => setSortOrder(e.target.value as typeof sortOrder)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="bg-primary-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="newToOld">New to Old</option>
                 <option value="oldToNew">Old to New</option>
@@ -121,7 +131,7 @@ export default function AllPosts() {
                     router.push('/tufts/posts')
                   }
                 }}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="bg-primary-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="">All Tags</option>
                 {uniqueTags.map(tag => (
@@ -137,10 +147,10 @@ export default function AllPosts() {
                 placeholder="Search posts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 pl-10"
+                className="bg-primary-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 pl-10"
               />
               <svg
-                className="absolute left-3 top-8 h-5 w-5 text-gray-400"
+                className="absolute left-3 top-8 h-5 w-5 text-black"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -157,10 +167,8 @@ export default function AllPosts() {
         </div>
 
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold text-gray-900">All Posts</h1>
-          
           {filteredPosts.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+            <div className="bg-primary-100 rounded-lg shadow-sm p-8 text-center">
               <p className="text-gray-600">Sorry, no posts match your criteria.</p>
             </div>
           ) : (
@@ -169,7 +177,7 @@ export default function AllPosts() {
                 <Link 
                   key={postId} 
                   href={`/tufts/posts/${postId}`}
-                  className="group bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                  className="group bg-primary-100 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
                 >
                   <div className="relative h-48">
                     <Image 
@@ -181,7 +189,7 @@ export default function AllPosts() {
                     />
                   </div>
                   <div className="p-4">
-                    <h2 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <h2 className="text-xl font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
                       {post.title}
                     </h2>
                     <div className="mt-2 flex items-center text-sm text-gray-500">
@@ -209,7 +217,7 @@ export default function AllPosts() {
                           d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                         />
                       </svg>
-                      {viewCounts[postId]} views
+                      {formatViewCount(viewCounts[postId])} views
                     </div>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {post.tags.map((tag, index) => (

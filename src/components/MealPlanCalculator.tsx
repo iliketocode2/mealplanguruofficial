@@ -67,11 +67,12 @@ const MealPlanCalculator = ({ plans }: { plans: Plan[] }) => {
   const suggestedPlans = getSuggestedPlans();
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-white">
       <CardContent className="space-y-6">
         <div className="space-y-6">
           <div className="mt-4">
             <label className="text-sm font-medium">What year are you?</label>
+            <div className="mt-2"></div>
             <Select onValueChange={setYear} value={year}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select your year" />

@@ -1,17 +1,29 @@
+'use client';
 import Image from 'next/image'
 import Link from 'next/link'
 import { plans } from '@/app/lib/tuftsplans'
-import { posts } from '@/app/lib/tuftsposts'
-import { diningLocations } from '@/app/lib/diningLocations';
-import MealPlanCalculator from '@/components/MealPlanCalculator';
-import HandyResources from '@/components/HandyResources';
-import DiningLocationCard from '@/components/DiningLocationCard';
+import MealPlanCalculator from '@/components/MealPlanCalculator'
+import HandyResources from '@/components/HandyResources'
+import RecentPosts from '@/components/RecentPosts'
+import MealPlanSection from '@/components/MealPlanSection'
+import DiningLocationCardWrapper from '@/components/DiningLocationCardWrapper'
+import CollapsibleSection from '@/components/CollapsibleSection';
+import { useState, useEffect } from 'react'
+import { CollapsibleProvider } from '@/components/CollapsibleContext';
 
 export default function Tufts() {
-  const recentPosts = Object.entries(posts)
-    .sort(([, postA], [, postB]) => 
-      new Date(postB.date).getTime() - new Date(postA.date).getTime())
-    .slice(0, 4);
+  // Use client-side rendering for the dining locations
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const PlacesToEatSection = () => (
+    <div className="space-y-6">
+      {isMounted && <DiningLocationCardWrapper />}
+    </div>
+  )
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
@@ -29,119 +41,84 @@ export default function Tufts() {
           </Link>
         </div>
 
-        {/* Main layout container */}
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Sidebar */}
-          <aside className="lg:w-1/3 flex flex-col">
-            <div className="mb-6">
+        {/* Mobile Layout */}
+        <div className="lg:hidden space-y-4">
+          <CollapsibleProvider>
+            <CollapsibleSection title="Quick Resources">
               <HandyResources />
-            </div>
-            
-            <section className="bg-white rounded-lg shadow-sm p-6 flex-grow">
-              <Link href="/tufts/posts" className="inline-block mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-                  Recent Posts
-                </h2>
-              </Link>
-              <div className="space-y-4">
-                {recentPosts.map(([postId, post]) => (
-                  <div key={postId} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                    {postId ? (
-                      <Link href={`/tufts/posts/${postId}`} 
-                            className="block hover:bg-gray-50 p-3 -mx-3 rounded-md transition-colors">
-                        <h3 className="font-medium text-gray-900 hover:text-blue-600 transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-sm text-gray-500 mt-1">{post.date}</p>
-                        <p className="text-sm text-gray-600">{post.author}</p>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {post.tags.map((tag, index) => (
-                            <span key={index} className="px-2 py-1 bg-blue-50 text-blue-600 text-xs rounded-full">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </Link>
-                    ) : (
-                      <p className="text-gray-500">Post ID is not available</p>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <Link href="/tufts/posts" 
-                    className="inline-block mt-4 text-blue-600 hover:text-blue-700 transition-colors">
-                See More →
-              </Link>
-            </section>
-          </aside>
+            </CollapsibleSection>
 
-          {/* Main content */}
-          <main className="lg:w-2/3 space-y-6">
-            <section id="meal-plans" className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plans</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                {plans.map((plan, index) => (
-                  <div key={index} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
-                    <h3 className="text-xl font-medium text-gray-900 mb-2">{plan.name}</h3>
-                    <p className="text-gray-600 mb-2">{plan.details}</p>
-                    <p className="text-lg font-bold text-gray-900 mb-2">{plan.price}</p>
-                    <p className="text-gray-600 mb-4">{plan.extra}</p>
-                    <Link href={`/tufts/posts?tag=${plan.tag}`}
-                          className="text-blue-600 hover:text-blue-700 transition-colors">
-                      See Related Posts →
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <CollapsibleSection title="Recent Posts">
+              <RecentPosts />
+            </CollapsibleSection>
 
-            <section id="calculator" className="bg-white rounded-lg shadow-sm p-6">
-              <div className="max-h-[700px] overflow-y-auto">
+            <CollapsibleSection title="Meal Plan Information">
+              <div className="max-h-[700px] overflow-y-auto" id="mobile-meal-plans">
+                <MealPlanSection />
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="Meal Plan Calculator">
+              <div className="max-h-[700px] overflow-y-auto" id="mobile-calculator">
                 <MealPlanCalculator plans={plans} />
               </div>
-            </section>
-          </main>
+            </CollapsibleSection>
+            
+            <CollapsibleSection title="Places to Eat">
+              <div className="max-h-[700px] overflow-y-auto" id="mobile-places-eat">
+                <PlacesToEatSection />
+              </div>
+            </CollapsibleSection>
+
+          </CollapsibleProvider>
         </div>
 
-        <section id="places-eat" className="bg-white rounded-lg shadow-sm p-6 space-y-6 mt-6">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-medium mb-4 text-gray-900">Dining Halls</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                {diningLocations
-                  .filter(location => location.type === 'dining-hall')
-                  .map(location => (
-                    <DiningLocationCard key={location.name} location={location} />
-                  ))}
+        {/* Desktop layout */}
+        <div className="hidden lg:block">
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Sidebar */}
+            <aside className="lg:w-1/3 flex flex-col">
+              <div className="mb-6">
+                <section className="bg-white rounded-lg shadow-sm p-6">
+                  <h2 className="text-xl font-semibold mb-4 text-gray-900">Handy Resources for Students</h2>
+                  <HandyResources />
+                </section>
               </div>
-            </div>
+              
+              <section className="bg-white rounded-lg shadow-sm p-6 flex-grow">
+                <div className="space-y-4">
+                  <Link href="/tufts/posts" className="inline-block mb-4">
+                    <h2 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                      Recent Posts
+                    </h2>
+                  </Link>
+                  <RecentPosts />
+                </div>
+              </section>
+            </aside>
 
-            <div>
-              <h3 className="text-xl font-medium mb-4 text-gray-900">Retail Locations</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                {diningLocations
-                  .filter(location => location.type === 'retail')
-                  .map(location => (
-                    <DiningLocationCard key={location.name} location={location} />
-                  ))}
-              </div>
-            </div>
+            {/* Main content */}
+            <main className="lg:w-2/3 space-y-6">
+              <section className="bg-white rounded-lg shadow-sm p-6" id="meal-plans" >
+                <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plans</h2>
+                <MealPlanSection />
+              </section>
 
-            <div>
-              <h3 className="text-xl font-medium mb-4 text-gray-900">Other Locations</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                {diningLocations
-                  .filter(location => location.type === 'other')
-                  .map(location => (
-                    <DiningLocationCard key={location.name} location={location} />
-                  ))}
-              </div>
-            </div>
+              <section className="bg-white rounded-lg shadow-sm p-6" id="calculator">
+                <div className="max-h-[700px] overflow-y-auto">
+                  <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Plan Calculator</h2>
+                  <MealPlanCalculator plans={plans} />
+                </div>
+              </section>
+            </main>
           </div>
-        </section>
+
+          <section className="bg-white rounded-lg shadow-sm p-6 space-y-6 mt-6" id="places-eat">
+              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>
+              <PlacesToEatSection />
+          </section>
+        </div>
       </div>
     </div>
-  );
+  )
 }

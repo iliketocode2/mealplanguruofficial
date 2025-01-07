@@ -1,10 +1,33 @@
 import Image from 'next/image';
 
 const HandyResources = () => {
-  return (
+    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        const href = event.currentTarget.getAttribute('href');
+        if (!href?.startsWith('#')) return;
+    
+        const isMobile = window.innerWidth < 1024;
+        const targetId = href.slice(1);
+        const mobileId = `mobile-${targetId}`;
+    
+        event.preventDefault();
+        const element = document.getElementById(isMobile ? mobileId : targetId);
+        
+        if (isMobile) {
+        window.location.hash = mobileId;
+        } else {
+        window.location.hash = targetId;
+        if (element) {
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - 60, // 60px offset from the top
+                behavior: 'smooth'
+            });
+        }
+        }
+    };
+  
+    return (
     <div className="space-y-6">
-      <section className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900">Handy Resources for Students</h2>
         <div className="space-y-4">
           <div className="p-3 hover:bg-gray-50 rounded-md transition-colors">
             <div className="flex items-center space-x-3 mb-3">
@@ -74,18 +97,21 @@ const HandyResources = () => {
                     </a>
                     <a 
                     href="#calculator" 
+                    onClick={handleLinkClick}
                     className="block p-2 text-blue-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                     >
                     Meal Plan Calculator
                     </a>
                     <a 
                     href="#meal-plans" 
+                    onClick={handleLinkClick}
                     className="block p-2 text-blue-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                     >
-                    Meal Plans Overview
+                    Meal Plan Information
                     </a>
                     <a 
                     href="#places-eat" 
+                    onClick={handleLinkClick}
                     className="block p-2 text-blue-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                     >
                     Places To Eat
@@ -93,7 +119,6 @@ const HandyResources = () => {
                 </div>
             </div>
         </div>
-      </section>
     </div>
   );
 };

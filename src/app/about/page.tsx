@@ -71,7 +71,7 @@ export default function About() {
             </div>
             <div className="absolute top-48 left-0 w-2/3 h-64">
               <Image
-                src="/food_images/dewick_dessert.jpg"
+                src="/food_images/carm_breakfast.jpg"
                 alt="Favorite dish 2"
                 fill
                 className="object-cover rounded-xl shadow-lg"
@@ -79,7 +79,7 @@ export default function About() {
             </div>
             <div className="absolute bottom-0 right-8 w-2/3 h-64">
               <Image
-                src="/food_images/carm_breakfast.jpg"
+                src="/food_images/dewick_dessert.jpg"
                 alt="Favorite dish 3"
                 fill
                 className="object-cover rounded-xl shadow-lg"

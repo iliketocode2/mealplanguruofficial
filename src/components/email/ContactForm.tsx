@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 type FormData = {
   name: string;
@@ -10,6 +10,8 @@ type FormData = {
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 const ContactForm = () => {
+  // Use null as initial state to prevent hydration mismatch
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -29,6 +31,11 @@ const ContactForm = () => {
   });
 
   const [status, setStatus] = useState<FormStatus>('idle');
+
+  // Set mounted state after initial render
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const validateField = (name: keyof FormData, value: string): string => {
     switch (name) {
@@ -127,14 +134,25 @@ const ContactForm = () => {
     }
   };
 
-  // Instead of template literals, use concatenated strings for className
+  // Avoid template literals in className to prevent hydration issues
   const getInputClassName = (field: keyof FormData): string => {
     const baseClasses = 'w-full p-2 border rounded transition-all duration-200 focus:outline-none focus:ring-2';
     const errorClasses = touched[field] && errors[field] ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200';
-    return `${baseClasses} ${errorClasses}`;
+    return baseClasses + ' ' + errorClasses;
   };
 
-  const errorClassName = 'text-red-500 text-sm mt-1 animate-[slideDown_0.2s_ease-in-out]';
+  // If not mounted yet, render a placeholder to prevent hydration mismatch
+  if (!mounted) {
+    return <div className="max-w-md mx-auto p-6 animate-pulse">
+      <div className="h-8 bg-gray-200 rounded mb-4"></div>
+      <div className="space-y-4">
+        <div className="h-10 bg-gray-200 rounded"></div>
+        <div className="h-10 bg-gray-200 rounded"></div>
+        <div className="h-32 bg-gray-200 rounded"></div>
+        <div className="h-10 bg-gray-200 rounded"></div>
+      </div>
+    </div>;
+  }
 
   return (
     <div className="max-w-md mx-auto p-6">
@@ -151,8 +169,6 @@ const ContactForm = () => {
         }
       `}</style>
 
-      <h1 className="text-black text-2xl font-bold mb-4">Contact Us</h1>
-      
       <form onSubmit={handleSubmit} className="space-y-4 text-black">
         <div>
           <label className="block mb-1 font-medium">Name</label>
@@ -166,7 +182,7 @@ const ContactForm = () => {
             placeholder="Enter your name"
           />
           {touched.name && errors.name && (
-            <p className={errorClassName}>{errors.name}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.name}</p>
           )}
         </div>
 
@@ -182,7 +198,7 @@ const ContactForm = () => {
             placeholder="Enter your email"
           />
           {touched.email && errors.email && (
-            <p className={errorClassName}>{errors.email}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
           )}
         </div>
 
@@ -198,7 +214,7 @@ const ContactForm = () => {
             placeholder="Enter your message"
           />
           {touched.message && errors.message && (
-            <p className={errorClassName}>{errors.message}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
           )}
         </div>
 
@@ -211,14 +227,10 @@ const ContactForm = () => {
         </button>
         
         {status === 'success' && (
-          <p className="text-green-500 text-center animate-[slideDown_0.2s_ease-in-out]">
-            Message sent successfully!
-          </p>
+          <p className="text-green-500 text-center">Message sent successfully!</p>
         )}
         {status === 'error' && (
-          <p className="text-red-500 text-center animate-[slideDown_0.2s_ease-in-out]">
-            Failed to send message. Please try again. 
-          </p>
+          <p className="text-red-500 text-center">Failed to send message. Please try again.</p>
         )}
       </form>
     </div>

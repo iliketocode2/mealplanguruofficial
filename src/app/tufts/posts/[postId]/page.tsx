@@ -213,8 +213,9 @@ export default function BlogPostPage() {
                       <p className="text-gray-600 text-sm line-clamp-2">
                         {popularPost.content.join(' ').substring(0, 100)}...
                       </p>
-                      <div className="text-sm text-gray-500 mt-2">
-                        {viewCounts[id] || 0} views
+                      <div className="text-sm text-gray-500 mt-2 flex items-center gap-1">
+                        <Eye className="h-4 w-4" />
+                        {formatViewCount(viewCounts[id] || 0)}
                       </div>
                     </div>
                   </div>

@@ -47,7 +47,7 @@ export default function NavBar() {
             ))}
           </div>
 
-          <div className="md:hidden">
+          <div className="block md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none"
@@ -73,12 +73,12 @@ export default function NavBar() {
       {/* Mobile menu with animation */}
       <div 
         className={`
-          md:hidden overflow-hidden transition-all duration-300 ease-in-out
+          block md:hidden transition-all duration-300 ease-in-out bg-white
           ${isOpen ? 'opacity-100' : 'opacity-0'}
         `}
         style={{ 
           maxHeight: isOpen ? `${menuHeight}px` : '0',
-          visibility: isOpen ? 'visible' : 'hidden'
+          overflow: 'hidden'
         }}
       >
         <div 

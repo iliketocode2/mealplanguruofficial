@@ -27,5 +27,6 @@ export interface DiningLocation {
     rating: number;
     address: string;
     description: string;
+    payment: string;
     type: 'dining-hall' | 'retail' | 'other';
   }

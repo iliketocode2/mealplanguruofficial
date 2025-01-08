@@ -8,6 +8,7 @@ import RecentPosts from '@/components/RecentPosts'
 import MealPlanSection from '@/components/MealPlanSection'
 import DiningLocationCardWrapper from '@/components/DiningLocationCardWrapper'
 import CollapsibleSection from '@/components/CollapsibleSection';
+import MealTimes from '@/components/MealTimes'
 import { useState, useEffect } from 'react'
 import { CollapsibleProvider } from '@/components/CollapsibleContext';
 
@@ -63,6 +64,12 @@ export default function Tufts() {
                 <MealPlanCalculator plans={plans} />
               </div>
             </CollapsibleSection>
+
+            <CollapsibleSection title="Meal Times and Equivalency">
+              <div className="max-h-[700px] overflow-y-auto" id="mobile-meal-times">
+                <MealTimes />
+              </div>
+            </CollapsibleSection>
             
             <CollapsibleSection title="Places to Eat">
               <div className="max-h-[700px] overflow-y-auto" id="mobile-places-eat">
@@ -112,6 +119,11 @@ export default function Tufts() {
               </section>
             </main>
           </div>
+
+          <section className="bg-primary-100 rounded-lg shadow-sm p-6 space-y-6 mt-6" id="meal-times">
+              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Meal Times and Equivalency</h2>
+              <MealTimes />
+          </section>
 
           <section className="bg-primary-100 rounded-lg shadow-sm p-6 space-y-6 mt-6" id="places-eat">
               <h2 className="text-2xl font-semibold mb-6 text-gray-900">Places to Eat</h2>

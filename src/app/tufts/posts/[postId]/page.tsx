@@ -5,6 +5,17 @@ import { posts } from '@/app/lib/tuftsposts';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Post } from '@/app/lib/types';
+import { Eye } from 'lucide-react';
+
+const formatViewCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1).replace(/\.0$/, '')}M`
+  }
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}k`
+  }
+  return count.toString()
+}
 
 export default function BlogPostPage() {
   const { postId } = useParams<{ postId: string }>();
@@ -95,27 +106,37 @@ export default function BlogPostPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <article className="lg:col-span-2 rounded-xl shadow-lg overflow-hidden bg-primary-100 ">
             {/* Main section with background image */}
-            <div className="relative h-64">
-              <Image 
-                src={post.imageUrl} 
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80">
-              <Link
-                href="/tufts/posts"
-                className="p-6 inline-block mt-0 group text-white"
-              >
-                ← All Posts
-                <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-white"></span>
-              </Link>
-                <div className="absolute bottom-0 p-6 w-full">
-                  <h1 className="text-4xl font-bold mb-3 text-white">{post.title}</h1>
-                  <div className="flex items-center space-x-4 text-gray-200 text-sm">
+            <div className="relative">
+              {/* Background image container */}
+              <div className="absolute inset-0">
+                <Image 
+                  src={post.imageUrl} 
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              
+              {/* Content container with gradient */}
+              <div className="relative z-10 bg-gradient-to-b from-black/60 to-black/80">
+                {/* Back to posts link */}
+                <div className="p-6">
+                  <Link
+                    href="/tufts/posts"
+                    className="inline-block group text-white"
+                  >
+                    ← All Posts
+                    <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-white"></span>
+                  </Link>
+                </div>
+                
+                {/* Title and metadata */}
+                <div className="p-6 pt-0">
+                  <h1 className="text-4xl font-bold mb-3 text-white break-words">{post.title}</h1>
+                  <div className="flex flex-wrap items-center gap-2 text-gray-200 text-sm">
                     <Link 
-                      href={`/about#${generateAuthorId(post.author)}`} 
+                      href="/about"
                       className="hover:text-primary-400 transition-colors duration-200"
                     >
                       By {post.author}
@@ -123,10 +144,16 @@ export default function BlogPostPage() {
                     <span>|</span>
                     <time>{post.date}</time>
                     <span>|</span>
-                    <span>{viewCounts[postId] || 0} views</span>
+                    <span className="flex items-center gap-1">
+                      <Eye className="h-4 w-4" />
+                      {formatViewCount(viewCounts[postId] || 0)}
+                    </span>
                   </div>
                 </div>
               </div>
+
+              {/* Ensure minimum height for short content */}
+              <div className="absolute inset-0 z-0 min-h-[16rem]"></div>
             </div>
             
             {/* Article content */}

@@ -19,18 +19,18 @@ export const posts: Record<string, Post> = {
       content: [
         'Review of the best places to eat on campus',
       ],
-      author: 'Elliot Smith',
+      author: 'William Goldman',
         imageUrl: '/images/tufts_dining.jpg',
         tags: ['Review'],
         viewCount: 0,
     },
     'post-3': {
-      title: 'Another banger review',
+      title: 'Meal Plan Equivalency: How much money you get, and how to best use them',
       date: '12/13/2024',
       content: [
         'Review of something else',
       ],
-      author: 'Elliot Smith',
+      author: 'William Goldman',
         imageUrl: '/images/tufts_dining.jpg',
         tags: ['100', 'Review'],
         viewCount: 0,
@@ -41,7 +41,7 @@ export const posts: Record<string, Post> = {
       content: [
         'Dewick is terrible!!',
       ],
-      author: 'Priya Shah',
+      author: 'William Goldman',
         imageUrl: '/images/tufts_dining.jpg',
         tags: ['400', 'News'],
         viewCount: 0,
@@ -100,7 +100,7 @@ The 160 Plan also accounts for the unpredictable nature of student life. With en
 
 In conclusion, the 160 Plan offers the best value for money, adaptability, and practicality among Tufts meal plans. It recognizes that not all students eat the same way and provides the right mix of resources to cater to diverse lifestyles. For those seeking an efficient, budget-friendly, and versatile dining solution, the 160 Plan is an unbeatable choice.`,
       ],
-      author: 'Priya Shah',
+      author: 'William Goldman',
         imageUrl: '/images/tufts_dining.jpg',
         tags: ['160', 'Opinion'],
         viewCount: 0,

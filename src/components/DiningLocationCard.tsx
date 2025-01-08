@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Star, StarHalf } from 'lucide-react';
+import { Star, StarHalf, MapPin, CreditCard, Info } from 'lucide-react';
 import { DiningLocation } from '@/app/lib/types';
 
 const DiningLocationCard = ({ location }: { location: DiningLocation }) => {
@@ -50,8 +50,24 @@ const DiningLocationCard = ({ location }: { location: DiningLocation }) => {
           {renderStars(location.rating)}
           <span className="text-sm text-gray-600 ml-1">{location.rating.toFixed(1)}</span>
         </div>
-        <p className="text-sm text-gray-600 mt-2">{location.address}</p>
-        <p className="text-sm text-gray-700 mt-2">{location.description}</p>
+        
+        {/* Location Address */}
+        <div className="flex items-start gap-2 mt-3">
+          <MapPin className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+          <p className="text-sm text-gray-600">{location.address}</p>
+        </div>
+
+        {/* Payment Methods */}
+        <div className="flex items-start gap-2 mt-2 bg-gray-50 rounded-md p-2">
+          <CreditCard className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+          <p className="text-sm text-gray-700 font-medium">{location.payment}</p>
+        </div>
+
+        {/* Description */}
+        <div className="flex items-start gap-2 mt-3 border-t pt-3">
+          <Info className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+          <p className="text-sm leading-relaxed text-gray-600">{location.description}</p>
+        </div>
       </div>
     </div>
   );

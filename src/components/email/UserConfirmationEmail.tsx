@@ -8,10 +8,6 @@ interface UserConfirmationEmailProps {
 }
 
 export default function UserConfirmationEmail({ name, email, message }: UserConfirmationEmailProps) {
-  // You can replace this with your actual deployed domain
-  const baseUrl = process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000';
 
   return (
     <Html>
@@ -26,7 +22,7 @@ export default function UserConfirmationEmail({ name, email, message }: UserConf
           {/* Logo */}
           <Section style={{ textAlign: 'center', marginBottom: '30px' }}>
             <Img
-              src={`${baseUrl}/logo.svg`}
+              src={`https://www.mealplangurus.com/logo.png`}
               width="150"
               height="50"
               alt="Logo"
@@ -92,7 +88,7 @@ export default function UserConfirmationEmail({ name, email, message }: UserConf
 
           <Section style={{ textAlign: 'center', marginTop: '30px' }}>
             <Button
-              href={baseUrl}
+              href={`https://www.mealplangurus.com`}
               style={{
                 backgroundColor: '#4F46E5',
                 color: '#ffffff',

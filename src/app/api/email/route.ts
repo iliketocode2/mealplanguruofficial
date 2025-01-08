@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     
     // Send admin summary email
     const adminEmail = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'SomeoneEmailedMPGurus@mealplangurus.com',
       to: 'goldmanwilliam3@gmail.com',
       subject: 'New Contact Form Submission',
       react: AdminEmailTemplate({ name, email, message }),
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     // Send user confirmation email
     const userEmail = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'MealPlanGuru@mealplangurus.com',
       to: email,
       subject: 'Thank You for Contacting Us',
       react: UserConfirmationEmail({ name, email, message }),

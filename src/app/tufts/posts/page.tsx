@@ -97,9 +97,9 @@ export default function AllPosts() {
             <Image 
               src="/images/tufts-logo-png-white.png"
               alt="Back to Tufts"
-              width={300} 
+              width={300}
               height={200}
-              className="object-contain"
+              className="object-contain w-[300px] h-auto"
             />
           </Link>
         </div>

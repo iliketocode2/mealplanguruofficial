@@ -49,7 +49,13 @@ export default function NavBar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <Image src="/logo.svg" height={1} width={180} alt="Logo"/>
+              <Image 
+                src="/logo.svg" 
+                width={180}
+                height={50}
+                className="object-contain w-[180px] h-auto"
+                priority 
+                alt="Logo"/>
             </Link>
           </div>
           

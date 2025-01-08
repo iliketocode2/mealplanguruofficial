@@ -51,7 +51,7 @@ export default function UserConfirmationEmail({ name, email, message }: UserConf
             marginBottom: '30px',
             textAlign: 'center'
           }}>
-            Hi {name}, we've received your message and will get back to you as soon as possible.
+            Hi {name}, we have received your message and will get back to you as soon as possible.
           </Text>
 
           <Section style={{
@@ -113,7 +113,7 @@ export default function UserConfirmationEmail({ name, email, message }: UserConf
             textAlign: 'center',
             marginTop: '30px'
           }}>
-            If you didn't submit this contact form, please ignore this email.
+            {"If you didn't submit this contact form, please ignore this email."}
           </Text>
         </Container>
       </Body>

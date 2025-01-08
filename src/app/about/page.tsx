@@ -14,7 +14,7 @@ export default function About() {
                 <span className="text-blue-600"> Better</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Hi, I'm William Goldman! I created this platform to help students navigate their dining experience and make informed choices about their meal plans.
+                {"Hi, I'm William Goldman! I created this platform to help students navigate their dining experience and make informed choices about their meal plans."}
               </p>
             </div>
             <div className="relative h-64 md:h-96">
@@ -48,8 +48,8 @@ export default function About() {
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">Why This Platform?</h3>
               <p className="text-gray-600 leading-relaxed">
-                As a student, I've noticed that we often learn the most from each other and tend to listen more
-                closely to our peers. That's why I think a blog written by students, along with a website full 
+                As a student, I have noticed that we often learn the most from each other and tend to listen more
+                closely to our peers. That is why I think a blog written by students, along with a website full 
                 of helpful information, is the best way to encourage students to connect and learn more about 
                 their meal plans. This platform can help everyone make smarter choices and better understand how 
                 their meal plan expenses are divided.
@@ -91,9 +91,9 @@ export default function About() {
       <div className="bg-blue-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Let's Connect</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">{"Let's Connect"}</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Have questions or suggestions? I'd love to hear from you!
+              {"Have questions or suggestions? I'd love to hear from you!"}
             </p>
 
             <div className="flex justify-center space-x-8 mt-4">

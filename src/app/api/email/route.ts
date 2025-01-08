@@ -3,6 +3,11 @@ import { Resend } from 'resend';
 import AdminEmailTemplate from '@/components/email/AdminEmailTemplate';
 import UserConfirmationEmail from '@/components/email/UserConfirmationEmail';
 
+
+if (!process.env.RESEND_API_KEY) {
+  throw new Error('RESEND_API_KEY is not defined in environment variables');
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {

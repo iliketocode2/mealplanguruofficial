@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const HandyResources = () => {
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -89,12 +90,12 @@ const HandyResources = () => {
             <div className="space-y-3">
                 <h3 className="text-xl font-semibold text-gray-900">On This Site</h3>
                 <div className="flex flex-wrap gap-3">
-                    <a 
+                    <Link
                     href="/tufts/posts" 
                     className="block p-2 text-blue-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                     >
                     Blog
-                    </a>
+                    </Link>
                     <a 
                     href="#calculator" 
                     onClick={handleLinkClick}

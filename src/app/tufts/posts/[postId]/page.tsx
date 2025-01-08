@@ -25,9 +25,10 @@ export default function BlogPostPage() {
   const [popularPosts, setPopularPosts] = useState<Array<[string, Post]>>([]);
   const router = useRouter();
 
-  const generateAuthorId = (author: string) => {
-    return author.toLowerCase().replace(/\s+/g, '_');
-  };
+    // WILL USE THIS LATER IF MULTIPLE AUTHORS
+  // const generateAuthorId = (author: string) => {
+  //   return author.toLowerCase().replace(/\s+/g, '_');
+  // };
 
   useEffect(() => {
     const minLoadingTime = 500; // ms

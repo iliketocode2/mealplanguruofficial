@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function NavBar() {
@@ -48,7 +49,7 @@ export default function NavBar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <img src="/logo.svg" alt="Logo" className="h-12 w-auto" />
+              <Image src="/logo.svg" height={1} width={180} alt="Logo"/>
             </Link>
           </div>
           

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -56,7 +57,7 @@ export default function Footer() {
           {/* Column 3: Footer Bottom */}
           <div className="text-sm text-gray-400">
             <Link href="/" className="flex items-center mb-2">
-              <img src="/logo.svg" alt="Logo" className="h-12 w-auto" />
+              <Image src="/logo.svg" height={1} width={180} alt="Logo"/>
             </Link>
             <p>&copy; {currentYear} MealPlanGuru. All rights reserved.</p>
           </div>

@@ -3,7 +3,7 @@ import { Post, DatabasePost } from './types'
 export const posts: Record<string, Post> = {
 'post-1': {
       title: 'How to use all of your meal swipes',
-      date: '1/4/2024',
+      date: '1/4/2025',
       content: [
         `As a Tufts student, your meal plan is packed with opportunities to fuel your day—and there’s more to it than just dining hall meals! Here are some tips to help you get the most out of it:`,
 `1. Dining Halls`,
@@ -24,7 +24,7 @@ export const posts: Record<string, Post> = {
     },
     'post-2': {
       title: 'Freshman Guide: Making the Most of Your 400-Swipe Meal Plan',
-      date: '1/3/2024',
+      date: '1/3/2025',
       content: [
         `Welcome to Tufts! If you’re starting your first year with the full 400-swipe meal plan, you’ve got plenty of opportunities to enjoy everything Tufts Dining has to offer. Here’s how to navigate your swipes and make the most of your plan.`,
 
@@ -44,7 +44,7 @@ export const posts: Record<string, Post> = {
       ],
       author: 'William Goldman',
         imageUrl: '/food_images/dewick_meal2.jpg',
-        tags: ['Guide'],
+        tags: ['Guide', '400'],
         viewCount: 0,
     },
     'post-3': {
@@ -60,7 +60,7 @@ export const posts: Record<string, Post> = {
 `Ultimately, keeping dining halls open longer is a step toward inclusivity. By prioritizing the well-being of both students and staff, Tufts can create a solution that benefits the entire community.`
       ],
       author: 'William Goldman',
-        imageUrl: '/images/tufts_dining.jpg',
+        imageUrl: '/food_images/dewick_empty.jpg',
         tags: ['Opinion'],
         viewCount: 0,
     },
@@ -77,13 +77,13 @@ export const posts: Record<string, Post> = {
 `While the concept of a campus pub is promising, students are calling for changes—like more affordable pricing and a livelier environment—to make it a place worth visiting. For now, many seem to prefer more established off-campus venues over this new addition to Tufts.`
       ],
       author: 'William Goldman',
-        imageUrl: '/images/tufts_dining_logo.jpg',
-        tags: ['400', 'News'],
+        imageUrl: '/images/tufts_dining_logo.png',
+        tags: ['News'],
         viewCount: 0,
     },
     'post-5': {
       title: 'Exploring Tufts University Meal Plan Options',
-      date: '1/8/2024',
+      date: '1/8/2025',
       content: [
         `Tufts University offers a variety of meal plans to suit the diverse needs of its student body. These plans are designed to provide convenience, flexibility, and affordability, ensuring students can focus on their studies without worrying about daily meals. Here's an overview of the meal plan options available:`,
 
@@ -110,7 +110,7 @@ With these thoughtfully designed meal plans, Tufts University ensures every stud
       ],
       author: 'William Goldman',
         imageUrl: '/food_images/carm_apple.jpg',
-        tags: ['Review'],
+        tags: ['Review', '400', '220', '160', '100', '40'],
         viewCount: 0,
     },
     'post-6': {
@@ -137,7 +137,7 @@ In conclusion, the 160 Plan offers the best value for money, adaptability, and p
       ],
       author: 'William Goldman',
         imageUrl: '/food_images/kindlevan_sushi.jpg',
-        tags: ['160', 'Opinion'],
+        tags: ['Opinion', '160'],
         viewCount: 0,
     },
 }

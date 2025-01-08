@@ -19,10 +19,11 @@ export default function About() {
             </div>
             <div className="relative h-64 md:h-96">
               <Image
-                src="/food_images/will_eat.jpg"
+                src="/images/will_profile.jpg"
                 alt="William Goldman"
                 fill
                 className="object-cover rounded-2xl shadow-xl"
+                style={{ objectPosition: '100% 50%' }} 
                 priority
               />
             </div>

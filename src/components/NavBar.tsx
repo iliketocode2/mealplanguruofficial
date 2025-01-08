@@ -7,13 +7,40 @@ export default function NavBar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [menuHeight, setMenuHeight] = useState(0);
+  const [error, setError] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Update menu height whenever the menu content changes or when opened/closed
   useEffect(() => {
-    if (menuRef.current) {
-      setMenuHeight(menuRef.current.scrollHeight);
+    try {
+      if (menuRef.current) {
+        // Get the actual content height
+        const height = menuRef.current.scrollHeight;
+        setMenuHeight(height);
+        setError(null);
+      }
+    } catch (err) {
+      setError('Failed to calculate menu height');
+      console.error('Menu height calculation error:', err);
     }
-  }, []);
+  }, [isOpen]); // Re-run when menu opens/closes
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      try {
+        if (menuRef.current && isOpen) {
+          setMenuHeight(menuRef.current.scrollHeight);
+        }
+      } catch (err) {
+        setError('Failed to update menu height on resize');
+        console.error('Resize handling error:', err);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen]);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -52,6 +79,8 @@ export default function NavBar() {
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               <svg 
                 className={`h-6 w-6 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
@@ -72,14 +101,16 @@ export default function NavBar() {
 
       {/* Mobile menu with animation */}
       <div 
+        id="mobile-menu"
         className={`
           block md:hidden transition-all duration-300 ease-in-out bg-white
-          ${isOpen ? 'opacity-100' : 'opacity-0'}
+          ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
         `}
         style={{ 
-          maxHeight: isOpen ? `${menuHeight}px` : '0',
+          height: isOpen ? `${menuHeight}px` : '0',
           overflow: 'hidden'
         }}
+        role="navigation"
       >
         <div 
           ref={menuRef}
@@ -89,6 +120,12 @@ export default function NavBar() {
             ${isOpen ? 'translate-y-0' : '-translate-y-4'}
           `}
         >
+          {error && (
+            <div className="text-red-600 px-3 py-2 text-sm">
+              {error}
+            </div>
+          )}
+          
           {[
             { href: '/', label: 'Home' },
             { href: '/school', label: 'Find Your School' },

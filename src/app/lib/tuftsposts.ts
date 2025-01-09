@@ -43,7 +43,7 @@ export const posts: Record<string, Post> = {
 `With a little planning, your meal plan can fuel your semester without any stress. Enjoy exploring all the dining options Tufts has to offer!`
       ],
       author: 'William Goldman',
-        imageUrl: '/food_images/dewick_meal2.jpg',
+        imageUrl: '/food_images/hodge_bowls.jpg',
         tags: ['Guide', '400'],
         viewCount: 0,
     },
@@ -68,7 +68,7 @@ export const posts: Record<string, Post> = {
       title: 'Tufts Pop-Up Pub Faces Criticism',
       date: '12/17/2024',
       content: [
-        `While Tufts Dining’s new pop-up pub at Sophia Gordon Hall was introduced as a place for students, faculty, and staff to relax and connect, not everyone is impressed. According to some students, the pub is overpriced and falls short of creating a fun or welcoming atmosphere.`,
+        `While Tufts Dining’s new pop-up pub at the Hotung Café was introduced as a place for students, faculty, and staff to relax and connect, not everyone is impressed. According to some students, the pub is overpriced and falls short of creating a fun or welcoming atmosphere.`,
 
 `Open Thursdays from 5 p.m. to 9 p.m., the pub offers a menu of beer, wine, non-alcoholic drinks, and pub-style snacks like sliders and pretzels. However, students have expressed frustration with the high prices, saying the cost doesn’t match the quality or quantity of the food and drinks.`,
 
@@ -77,7 +77,7 @@ export const posts: Record<string, Post> = {
 `While the concept of a campus pub is promising, students are calling for changes—like more affordable pricing and a livelier environment—to make it a place worth visiting. For now, many seem to prefer more established off-campus venues over this new addition to Tufts.`
       ],
       author: 'William Goldman',
-        imageUrl: '/images/tufts_dining_logo.png',
+        imageUrl: '/food_images/pub_people.jpg',
         tags: ['News'],
         viewCount: 0,
     },
@@ -109,7 +109,7 @@ Dietary Needs: Tufts Dining accommodates dietary restrictions and preferences wi
 With these thoughtfully designed meal plans, Tufts University ensures every student can find an option that aligns with their lifestyle and dining habits.`,
       ],
       author: 'William Goldman',
-        imageUrl: '/food_images/carm_apple.jpg',
+        imageUrl: '/food_images/dewick_kosher_line.jpg',
         tags: ['Review', '400', '220', '160', '100', '40'],
         viewCount: 0,
     },

@@ -68,6 +68,16 @@ export const diningLocations: DiningLocation[] = [
       rating: 4.6,
       address: "46 Professors Row, Medford, MA 02155 (Back of the Campus Center)",
       description: "Mobile-order only location with excellent bagel sandwiches. Peanut and tree nut free.",
+      payment: "JumboCash, Cash, Credit Card (Mastercard, Visa, Discover)",
+      type: "retail"
+    },
+    {
+      name: "Hotung Café",
+      url: "hotung-cafe",
+      image: "/images/dining_locations/hotung.jpg",
+      rating: 4.2,
+      address: "44 Professors Row, Medford, MA 02155 (Lower floor of the Campus Center)",
+      description: "Small location with good breakfast snacks. Only place on campus to serve milk tea and boba.",
       payment: "Meal Plan Equivalency, JumboCash, Cash, Credit Card (Mastercard, Visa, Discover)",
       type: "retail"
     },
@@ -80,6 +90,16 @@ export const diningLocations: DiningLocation[] = [
       description: "Good spot to grab a hot or cold drink and study.",
       payment: "JumboCash, Credit Card (Mastercard, Visa, Discover)",
       type: "retail"
+    },
+    {
+      name: "The Sink",
+      url: "https://x.com/tuftssink",
+      image: "/images/dining_locations/sink.jpg",
+      rating: 4.8,
+      address: "44 Professors Row, Medford, MA 02155 (Main floor of the Campus Center)",
+      description: "Best place for coffee on campus made by incredible student baristas. Also serves pastries.",
+      payment: "JumboCash, Cash, Credit Card (Mastercard, Visa, Discover)",
+      type: "other"
     },
     {
       name: "SMFA Café",

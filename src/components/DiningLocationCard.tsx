@@ -24,6 +24,13 @@ const DiningLocationCard = ({ location }: { location: DiningLocation }) => {
     return stars;
   };
 
+  const getHref = (url: string) => {
+    if (url.startsWith('http')) {
+      return url;
+    }
+    return `https://dining.tufts.edu/where-to-eat/${url}`;
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       <div className="relative h-48 w-full">
@@ -38,7 +45,7 @@ const DiningLocationCard = ({ location }: { location: DiningLocation }) => {
       <div className="p-4">
         <h4 className="font-medium text-lg text-gray-900">
           <a
-            href={`https://dining.tufts.edu/where-to-eat/${location.url}`}
+            href={getHref(location.url)}
             target="_blank"
             rel="noreferrer"
             className="hover:text-blue-600 transition-colors"

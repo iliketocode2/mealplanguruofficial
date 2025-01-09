@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meal Plan Gurus 🍽️
 
-## Getting Started
+Welcome to **Meal Plan Gurus**, the ultimate guide to maximizing your meal plan! This site is designed to help students make informed decisions about their dining options, track their spending, and discover tips for getting the most out of their meal plans.  
 
-First, run the development server:
+## Purpose  
+Meal Plan Gurus aims to empower students by providing:  
+- **Customized advice** on how to use meal plans efficiently.  
+- **Detailed insights** into dining options, retail locations, and budgeting.  
+- **Easy-to-use tools** for tracking meal plan usage.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Whether you're trying to stretch your dining dollars or simply want to discover new ways to enjoy your campus dining experience, Meal Plan Gurus has you covered.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<div align="center" style="display: flex; justify-content: center; gap: 20px;">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" width="50" height="50">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" width="50" height="50">
+  <img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" alt="Tailwind CSS" width="50" height="50">
+  <img src="https://neon.tech/brand/neon-logomark-light-color.svg" alt="Neon" width="50" height="50">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="50" height="50">
+  <img src="https://www.fullstacktools.com/_next/image?url=https%3A%2F%2Ficon.horse%2Ficon%2Fresend.com&w=256&q=75" alt="Resend Email" width="50" height="50">
+</div>
 
-## Learn More
+<p align="center">
+  React.js &nbsp; | &nbsp; Next.js &nbsp; | &nbsp; Tailwind CSS &nbsp; | &nbsp; Neon &nbsp; | &nbsp; PostgreSQL &nbsp; | &nbsp; Resend Email
+</p>
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Get Started  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Visit [Meal Plan Gurus](https://www.mealplangurus.com/) to start optimizing your meal plan today!  

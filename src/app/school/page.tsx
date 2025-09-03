@@ -60,7 +60,7 @@ export default function School() {
                 <div className="absolute inset-0 rounded-full bg-black/60 backdrop-blur-sm 
                               flex flex-col items-center justify-center gap-2">
                   <span className="text-white font-semibold text-lg">Coming Soon</span>
-                  <span className="text-gray-300 text-sm">Summer 2025</span>
+                  <span className="text-gray-300 text-sm">Summer 2026</span>
                 </div>
               </div>
               <span className="mt-4 text-lg font-semibold text-gray-600">
@@ -87,7 +87,7 @@ export default function School() {
                 <div className="absolute inset-0 rounded-full bg-black/60 backdrop-blur-sm 
                               flex flex-col items-center justify-center gap-2">
                   <span className="text-white font-semibold text-lg">Coming Soon</span>
-                  <span className="text-gray-300 text-sm">Winter 2025</span>
+                  <span className="text-gray-300 text-sm">Winter 2026</span>
                 </div>
               </div>
               <span className="mt-4 text-lg font-semibold text-gray-600">

@@ -7,10 +7,10 @@ interface MealPeriod {
 }
 
 const mealPeriods: MealPeriod[] = [
-  { name: 'Breakfast', time: 'Unit Opening - 10:59am', value: 8.34 },
-  { name: 'Lunch', time: '11am - 1:59pm', value: 14.23 },
-  { name: 'Late Lunch', time: '2pm - 4:59pm', value: 14.23 },
-  { name: 'Dinner', time: '5pm - Unit Closing', value: 15.66 },
+  { name: 'Breakfast', time: 'Unit Opening - 10:59am', value: 8.84 },
+  { name: 'Lunch', time: '11am - 1:59pm', value: 15.09 },
+  { name: 'Late Lunch', time: '2pm - 4:59pm', value: 15.09 },
+  { name: 'Dinner', time: '5pm - Unit Closing', value: 16.59 },
 ];
 
 const MealTimes = () => {

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 type FormData = {
   name: string;
@@ -8,6 +8,26 @@ type FormData = {
 };
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+
+// Declare Turnstile types for TypeScript
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: string | HTMLElement, options: {
+        sitekey: string;
+        callback?: (token: string) => void;
+        'error-callback'?: (error: string) => void;
+        'expired-callback'?: () => void;
+        theme?: 'light' | 'dark' | 'auto';
+        size?: 'normal' | 'compact';
+      }) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+      getResponse: (widgetId: string) => string | undefined;
+      ready: (callback: () => void) => void;
+    };
+  }
+}
 
 const ContactForm = () => {
   // Use null as initial state to prevent hydration mismatch
@@ -31,11 +51,98 @@ const ContactForm = () => {
   });
 
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const turnstileWidgetId = useRef<string | null>(null);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
 
   // Set mounted state after initial render
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Load Turnstile script manually (without async/defer to use ready())
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Check if script is already loaded
+    if (window.turnstile) {
+      window.turnstile.ready(() => {
+        setTurnstileReady(true);
+      });
+      return;
+    }
+
+    // Check if script tag already exists
+    const existingScript = document.querySelector('script[src*="turnstile"]');
+    if (existingScript) {
+      // Script exists, wait for it to load
+      const checkTurnstile = () => {
+        if (window.turnstile) {
+          window.turnstile.ready(() => {
+            setTurnstileReady(true);
+          });
+        }
+      };
+      
+      if (window.turnstile) {
+        checkTurnstile();
+      } else {
+        // Wait for script to load
+        existingScript.addEventListener('load', checkTurnstile);
+      }
+      return;
+    }
+
+    // Create and load script without async/defer
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.defer = false; // Explicitly set to false
+    script.async = false; // Explicitly set to false
+    script.onload = () => {
+      if (window.turnstile) {
+        window.turnstile.ready(() => {
+          setTurnstileReady(true);
+        });
+      }
+    };
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      // Don't remove script on unmount as it might be used elsewhere
+    };
+  }, [mounted]);
+
+  // Initialize Turnstile widget when script is ready
+  useEffect(() => {
+    if (mounted && turnstileReady && turnstileContainerRef.current && !turnstileWidgetId.current) {
+      const sitekey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+      if (!sitekey) {
+        console.error('NEXT_PUBLIC_TURNSTILE_SITE_KEY is not defined');
+        return;
+      }
+
+      if (window.turnstile) {
+        turnstileWidgetId.current = window.turnstile.render(turnstileContainerRef.current, {
+          sitekey: sitekey,
+          callback: (token: string) => {
+            setTurnstileToken(token);
+          },
+          'error-callback': (error: string) => {
+            console.error('Turnstile error:', error);
+            setTurnstileToken(null);
+          },
+          'expired-callback': () => {
+            console.warn('Turnstile token expired');
+            setTurnstileToken(null);
+          },
+          theme: 'auto',
+          size: 'normal'
+        });
+      }
+    }
+  }, [mounted, turnstileReady]);
 
   const validateField = (name: keyof FormData, value: string): string => {
     switch (name) {
@@ -94,6 +201,12 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    // Validate Turnstile token
+    if (!turnstileToken) {
+      setStatus('error');
+      return;
+    }
+    
     const newErrors = {
       name: validateField('name', formData.name),
       email: validateField('email', formData.email),
@@ -115,7 +228,10 @@ const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          turnstileToken: turnstileToken
+        }),
       });
 
       const data = await response.json();
@@ -128,9 +244,20 @@ const ContactForm = () => {
       setFormData({ name: '', email: '', message: '' });
       setTouched({ name: false, email: false, message: false });
       setErrors({ name: '', email: '', message: '' });
+      
+      // Reset Turnstile widget after successful submission
+      if (turnstileWidgetId.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetId.current);
+        setTurnstileToken(null);
+      }
     } catch (error) {
       console.error('Error:', error);
       setStatus('error');
+      // Reset Turnstile on error so user can try again
+      if (turnstileWidgetId.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetId.current);
+        setTurnstileToken(null);
+      }
     }
   };
 
@@ -218,9 +345,14 @@ const ContactForm = () => {
           )}
         </div>
 
+        {/* Cloudflare Turnstile Widget */}
+        <div className="flex justify-center">
+          <div ref={turnstileContainerRef} id="turnstile-widget"></div>
+        </div>
+
         <button
           type="submit"
-          disabled={status === 'sending'}
+          disabled={status === 'sending' || !turnstileToken}
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200"
         >
           {status === 'sending' ? 'Sending...' : 'Send Message'}

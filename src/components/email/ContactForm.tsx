@@ -261,6 +261,15 @@ const ContactForm = () => {
     }
   };
 
+  // Check if all form fields are valid
+  const isFormValid = (): boolean => {
+    const nameError = validateField('name', formData.name);
+    const emailError = validateField('email', formData.email);
+    const messageError = validateField('message', formData.message);
+    
+    return !nameError && !emailError && !messageError;
+  };
+
   // Avoid template literals in className to prevent hydration issues
   const getInputClassName = (field: keyof FormData): string => {
     const baseClasses = 'w-full p-2 border rounded transition-all duration-200 focus:outline-none focus:ring-2';
@@ -352,7 +361,7 @@ const ContactForm = () => {
 
         <button
           type="submit"
-          disabled={status === 'sending' || !turnstileToken}
+          disabled={status === 'sending' || !turnstileToken || !isFormValid()}
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200"
         >
           {status === 'sending' ? 'Sending...' : 'Send Message'}

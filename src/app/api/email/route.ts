@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     // Send admin summary email
     const adminEmail = await resend.emails.send({
       from: 'SomeoneEmailedMPGurus@mealplangurus.com',
-      to: 'goldmanwilliam3@gmail.com',
+      to: 'goldmanwilliam3@gmail.com', // add an env here at some point?
       subject: 'New Contact Form Submission',
       react: AdminEmailTemplate({ name, email, message }),
     });

@@ -18,10 +18,10 @@ Whether you're trying to stretch your dining dollars or simply want to discover 
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" width="50" height="50">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" width="50" height="50">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/768px-Tailwind_CSS_Logo.svg.png?20230715030042" alt="Tailwind CSS" width="50" height="50">
-  <img src="https://neon.tech/brand/neon-logomark-light-color.svg" alt="Neon" width="50" height="50">
+  <img src="https://avatars.githubusercontent.com/u/77690634?v=4" alt="Neon" width="50" height="50">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="50" height="50">
   <img src="https://www.fullstacktools.com/_next/image?url=https%3A%2F%2Ficon.horse%2Ficon%2Fresend.com&w=256&q=75" alt="Resend Email" width="50" height="50">
-  <img src="https://images.seeklogo.com/logo-png/29/2/cloudflare-logo-png_seeklogo-294312.png" alt="Cloudflare" width="50" height="50">
+  <img src="https://everwas.com/wp-content/uploads/2025/06/cloudflare.png" alt="Cloudflare" width="50" height="50">
 </div>
 
 <p align="center">

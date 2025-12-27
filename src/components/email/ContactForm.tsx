@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import Script from 'next/script';
 
 type FormData = {
   name: string;
@@ -62,7 +61,60 @@ const ContactForm = () => {
     setMounted(true);
   }, []);
 
-  // Initialize Turnstile widget when script is loaded
+  // Load Turnstile script manually (without async/defer to use ready())
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Check if script is already loaded
+    if (window.turnstile) {
+      window.turnstile.ready(() => {
+        setTurnstileReady(true);
+      });
+      return;
+    }
+
+    // Check if script tag already exists
+    const existingScript = document.querySelector('script[src*="turnstile"]');
+    if (existingScript) {
+      // Script exists, wait for it to load
+      const checkTurnstile = () => {
+        if (window.turnstile) {
+          window.turnstile.ready(() => {
+            setTurnstileReady(true);
+          });
+        }
+      };
+      
+      if (window.turnstile) {
+        checkTurnstile();
+      } else {
+        // Wait for script to load
+        existingScript.addEventListener('load', checkTurnstile);
+      }
+      return;
+    }
+
+    // Create and load script without async/defer
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.defer = false; // Explicitly set to false
+    script.async = false; // Explicitly set to false
+    script.onload = () => {
+      if (window.turnstile) {
+        window.turnstile.ready(() => {
+          setTurnstileReady(true);
+        });
+      }
+    };
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      // Don't remove script on unmount as it might be used elsewhere
+    };
+  }, [mounted]);
+
+  // Initialize Turnstile widget when script is ready
   useEffect(() => {
     if (mounted && turnstileReady && turnstileContainerRef.current && !turnstileWidgetId.current) {
       const sitekey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -91,15 +143,6 @@ const ContactForm = () => {
       }
     }
   }, [mounted, turnstileReady]);
-
-  // Handle Turnstile script load
-  const handleTurnstileLoad = () => {
-    if (window.turnstile) {
-      window.turnstile.ready(() => {
-        setTurnstileReady(true);
-      });
-    }
-  };
 
   const validateField = (name: keyof FormData, value: string): string => {
     switch (name) {
@@ -240,11 +283,6 @@ const ContactForm = () => {
 
   return (
     <div className="max-w-md mx-auto p-6">
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-        strategy="afterInteractive"
-        onLoad={handleTurnstileLoad}
-      />
       <style jsx>{`
         @keyframes slideDown {
           from {
@@ -311,9 +349,6 @@ const ContactForm = () => {
         <div className="flex justify-center">
           <div ref={turnstileContainerRef} id="turnstile-widget"></div>
         </div>
-        {!turnstileToken && turnstileReady && (
-          <p className="text-amber-600 text-sm text-center">Please complete the verification challenge above</p>
-        )}
 
         <button
           type="submit"

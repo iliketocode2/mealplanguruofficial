@@ -21,7 +21,7 @@ Whether you're trying to stretch your dining dollars or simply want to discover 
   <img src="https://neon.tech/brand/neon-logomark-light-color.svg" alt="Neon" width="50" height="50">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="50" height="50">
   <img src="https://www.fullstacktools.com/_next/image?url=https%3A%2F%2Ficon.horse%2Ficon%2Fresend.com&w=256&q=75" alt="Resend Email" width="50" height="50">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTwLqLYQIJOcDVjey4Dy7q9K0FMioQUHyX5A&s" alt="Cloudflare" width="50" height="50">
+  <img src="https://images.seeklogo.com/logo-png/29/2/cloudflare-logo-png_seeklogo-294312.png" alt="Cloudflare" width="50" height="50">
 </div>
 
 <p align="center">

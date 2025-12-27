@@ -242,7 +242,7 @@ const ContactForm = () => {
     <div className="max-w-md mx-auto p-6">
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         onLoad={handleTurnstileLoad}
       />
       <style jsx>{`

@@ -15,6 +15,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Update baseline
-        uses: iliketocode2/WCAG_PR_Checker@main
+        uses: zachkklein/WCAG_PR_Checker@main
         with:
           mode: baseline

@@ -17,7 +17,7 @@ Whether you're trying to stretch your dining dollars or simply want to discover 
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" width="50" height="50">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" width="50" height="50">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/768px-Tailwind_CSS_Logo.svg.png?20230715030042" alt="Tailwind CSS" width="50" height="50">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1280px-Tailwind_CSS_Logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="Tailwind CSS" width="50" height="50">
   <img src="https://avatars.githubusercontent.com/u/77690634?v=4" alt="Neon" width="50" height="50">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="50" height="50">
   <img src="https://www.fullstacktools.com/_next/image?url=https%3A%2F%2Ficon.horse%2Ficon%2Fresend.com&w=256&q=75" alt="Resend Email" width="50" height="50">
